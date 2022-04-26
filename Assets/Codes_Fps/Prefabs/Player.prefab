@@ -471,6 +471,7 @@ GameObject:
   - component: {fileID: 2606412368585618914}
   - component: {fileID: 2606412368585618913}
   - component: {fileID: 2606412368585618919}
+  - component: {fileID: 555161283}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -556,7 +557,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b01adba58af89e94ca6061cd5897d1a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  walkSpeed: 5
+  runSpeed: 0
   headRotator: {fileID: 2606412367369070148}
   gunRotator: {fileID: 2606412368412425422}
   gunX: 0
@@ -567,7 +569,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2606412368585618716}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: e9812e4a6f60b7347a8c3ca027c65a5c, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
@@ -609,6 +611,24 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!143 &555161283
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2606412368585618716}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2606412368746106383
 GameObject:
   m_ObjectHideFlags: 0
@@ -743,7 +763,7 @@ MonoBehaviour:
   m_ShowCameraFrustum: 1
   m_IgnoreTimeScale: 0
   m_WorldUpOverride: {fileID: 0}
-  m_UpdateMethod: 2
+  m_UpdateMethod: 1
   m_BlendUpdateMethod: 1
   m_DefaultBlend:
     m_Style: 1
