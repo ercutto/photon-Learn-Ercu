@@ -4,17 +4,24 @@ using UnityEngine;
 
 public class TargetPos : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public float sensetivity = 300;
+    public Transform playerBody;
+    private float xRot=0;
     void Start()
     {
-        
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        float x = (Input.GetAxis("Mouse Y"));
-        float y = (Input.GetAxis("Mouse X"));
-        transform.position= new Vector3(x,-y,0);
+        float y = Input.GetAxis("Mouse X") * sensetivity * Time.deltaTime;
+        float x = Input.GetAxis("Mouse Y") * sensetivity * Time.deltaTime;
+        xRot -= x;
+        xRot = Mathf.Clamp(xRot, -87f, 87f);
+        transform.localRotation = Quaternion.Euler(xRot, 0f, 0f);
+        playerBody.Rotate(Vector3.up * y);
+
     }
 }

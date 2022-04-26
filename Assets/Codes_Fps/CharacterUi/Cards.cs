@@ -11,6 +11,8 @@ public class Cards : ScriptableObject
     public float health;
     public float speed;
     public float JumpSpeed;
+    public float fastSpeed;
+   
     public void Debuger()
     {
         //
