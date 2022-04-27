@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerName: Ercu
   GunName: Revolver
-  characterSprite: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
-  gunSprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  characterSprite: {fileID: 21300000, guid: fb5145461542bb746985f3208b3f0258, type: 3}
+  gunSprite: {fileID: 21300000, guid: 88717c23e92ed0c4583c3c8a51a53fff, type: 3}
   health: 100
   speed: 5
   JumpSpeed: 7
-  fastSpeed: 0
+  fastSpeed: 11
+  CharacterCanvas: {fileID: 713076688445566405, guid: 7e1e4932fb04e074ba62bb32e0f83a2b, type: 3}

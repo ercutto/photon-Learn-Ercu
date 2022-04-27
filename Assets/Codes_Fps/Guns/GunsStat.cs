@@ -5,6 +5,7 @@ using UnityEngine;
 public class GunsStat : ScriptableObject
 {
     public GameObject gunPrefab;
+    public GameObject bullertPrefab;
     public string gunName;
     [SerializeField]
     public int capacity;

@@ -12,9 +12,9 @@ public class Cards : ScriptableObject
     public float speed;
     public float JumpSpeed;
     public float fastSpeed;
-   
-    public void Debuger()
+    public GameObject CharacterCanvas;
+    public void start()
     {
-        //
+        
     }
 }

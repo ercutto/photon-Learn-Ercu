@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Pistol
   m_EditorClassIdentifier: 
   gunPrefab: {fileID: 5562202643777277476, guid: 43299888c65a7984abcb3c37e2a9f6d8, type: 3}
+  bullertPrefab: {fileID: 3274314153841052315, guid: f714ad265a6e3204f9ae116caa747800, type: 3}
   gunName: Pistol
   capacity: 6
   reloadTime: 1
   repeatTime: 0.5
-  range: 0
+  range: 100

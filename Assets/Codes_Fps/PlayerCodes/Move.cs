@@ -15,6 +15,7 @@ public class Move : MonoBehaviour
     {
         isFast = false;
         speed = card.speed;
+        fastSpeed = card.fastSpeed;
         controller.GetComponent<CharacterController>();
     }
 
@@ -26,14 +27,22 @@ public class Move : MonoBehaviour
         float y = Input.GetAxis("Vertical");
 
         Vector3 move = transform.right * x + transform.forward * y;
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            isFast = true;
+        }
+        else
+        {
+            isFast = false;
+        }
         if (isFast)
         {
-            controller.Move(move * fastSpeed * Time.deltaTime);
+            controller.Move(fastSpeed * Time.deltaTime * move);
 
         }
         else
         {
-            controller.Move(move * speed * Time.deltaTime);
+            controller.Move(speed * Time.deltaTime * move);
         }
 
     }

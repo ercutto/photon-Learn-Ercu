@@ -4,17 +4,24 @@ using UnityEngine;
 
 public class DebuggerSystem : MonoBehaviour
 {
+    public bool DebugOn;
     private string log;
     private const int MAXCHARS = 10000;
     private Queue myLogQueue = new Queue();
     void Start()
     {
+
+
         Debug.Log("Screen logger started");
+
+
     }
+
 
     void OnEnable()
     {
         Application.logMessageReceived += HandleLog;
+
     }
 
     void OnDisable()
@@ -31,10 +38,12 @@ public class DebuggerSystem : MonoBehaviour
 
     void Update()
     {
+
         while (myLogQueue.Count > 0)
             log = myLogQueue.Dequeue() + log;
         if (log.Length > MAXCHARS)
             log = log.Substring(0, MAXCHARS);
+
     }
 
     void OnGUI()
