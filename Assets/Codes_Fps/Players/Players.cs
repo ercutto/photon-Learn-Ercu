@@ -48,4 +48,8 @@ public class Players:MonoBehaviour
     {
         
     }
+    public void currentHealthHandler(float current)
+    {
+        healthArea.text = current.ToString();
+    }
 }

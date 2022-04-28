@@ -6,8 +6,9 @@ using UnityEngine.UI;
 public class BulletMove : MonoBehaviour
 {  
     
-    float bulletSpeed = 100f;
+    public float bulletSpeed = 100f;
     float Range = 100;
+    public float damageValue = 50f;
     Rigidbody rb;
     Vector3 startPos;
     public void start()
