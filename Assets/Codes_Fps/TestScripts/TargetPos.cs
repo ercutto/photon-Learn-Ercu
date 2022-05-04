@@ -1,8 +1,9 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TargetPos : MonoBehaviour
+public class TargetPos : MonoBehaviourPunCallbacks
 {
     public float sensetivity = 300;
     public Transform playerBody;
@@ -16,12 +17,16 @@ public class TargetPos : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float y = Input.GetAxis("Mouse X") * sensetivity * Time.deltaTime;
-        float x = Input.GetAxis("Mouse Y") * sensetivity * Time.deltaTime;
-        xRot -= x;
-        xRot = Mathf.Clamp(xRot, -87f, 87f);
-        transform.localRotation = Quaternion.Euler(xRot, 0f, 0f);
-        playerBody.Rotate(Vector3.up * y);
+        if (photonView.IsMine)
+        {
+            float y = Input.GetAxis("Mouse X") * sensetivity * Time.deltaTime;
+            float x = Input.GetAxis("Mouse Y") * sensetivity * Time.deltaTime;
+            xRot -= x;
+            xRot = Mathf.Clamp(xRot, -87f, 87f);
+            transform.localRotation = Quaternion.Euler(xRot, 0f, 0f);
+            playerBody.Rotate(Vector3.up * y);
+        }
+        
 
     }
 }

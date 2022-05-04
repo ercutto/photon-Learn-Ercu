@@ -1,8 +1,9 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerDamage : MonoBehaviour
+public class PlayerDamage : MonoBehaviourPunCallbacks
 {
     public float damageMultiplier;
     private float bulletdamage;
@@ -23,11 +24,15 @@ public class PlayerDamage : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag=="bullet")
-        {
-            bulletdamage = other.gameObject.GetComponent<BulletMove>().damageValue;
-            damageEffectsValue=bulletdamage* damageMultiplier;
-            playerColliders.Damage(damageEffectsValue);
+        if (photonView.IsMine) {
+            if (other.gameObject.tag == "bullet")
+            {
+                bulletdamage = other.gameObject.GetComponent<BulletMove>().damageValue;
+                damageEffectsValue = bulletdamage * damageMultiplier;
+                playerColliders.Damage(damageEffectsValue);
+            }
         }
+        
+         
     }
 }

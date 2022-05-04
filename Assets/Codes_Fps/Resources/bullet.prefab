@@ -93,6 +93,8 @@ GameObject:
   - component: {fileID: 5563169552527443261}
   - component: {fileID: 5819886583474583263}
   - component: {fileID: 436763245890903388}
+  - component: {fileID: 4687945918332815594}
+  - component: {fileID: 2453851915319149546}
   m_Layer: 7
   m_Name: bullet
   m_TagString: bullet
@@ -127,6 +129,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db41602664abf5e4c89ed47f3b6829cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletSpeed: 100
+  damageValue: 50
 --- !u!54 &5819886583474583263
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -156,3 +160,41 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.3, y: 0.29, z: 0.58}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4687945918332815594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3274314153841052315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
+--- !u!114 &2453851915319149546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3274314153841052315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0

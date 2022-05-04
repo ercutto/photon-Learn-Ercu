@@ -1,10 +1,12 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shoot : MonoBehaviour
+public class Shoot : MonoBehaviourPunCallbacks, IPunObservable
 {
     public GameObject bullet;
+    public bool IsFiring;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,16 +16,29 @@ public class Shoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (photonView.IsMine)
         {
-            Instantiate(bullet, transform.position, transform.rotation);
-            //GameObject newObj = ObjectPooler.SharedInstance.GetpooledObject();
-            //if (newObj != null)
-            //{
+            if (Input.GetMouseButtonDown(0))
+            {
+                Instantiate(bullet, transform.position, transform.rotation);
 
-            //    newObj.transform.SetPositionAndRotation(transform.position, transform.rotation);
-            //    newObj.SetActive(true);
-            //}
+            }
+        }
+       
+    }
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            // We own this player: send the others our data
+            
+            stream.SendNext(IsFiring);
+           
+        }
+        else
+        {
+            // Network player, receive data
+            this.IsFiring = (bool)stream.ReceiveNext();
         }
     }
 }

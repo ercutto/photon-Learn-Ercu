@@ -1,8 +1,9 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PhysicsCont : MonoBehaviour
+public class PhysicsCont : MonoBehaviourPunCallbacks
 {
     public  Vector3 velocity;
     public float gravity=-9.81f;
@@ -27,18 +28,23 @@ public class PhysicsCont : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-        if (isGrounded&&velocity.y<0)
+        if (photonView.IsMine)
         {
-            velocity.y = -2f;
+            isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+            if (isGrounded && velocity.y < 0)
+            {
+                velocity.y = -2f;
+            }
+            velocity.y += gravity * Time.deltaTime;
+            controller.Move(velocity * Time.deltaTime);
+            if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+            {
+                velocity.y += Mathf.Sqrt(jumpSeed * -2f * gravity);
+            }
+            velocity.y += gravity * Time.deltaTime;
+            controller.Move(velocity * Time.deltaTime);
+
         }
-        velocity.y += gravity*Time.deltaTime;
-        controller.Move(velocity * Time.deltaTime);
-        if (Input.GetKeyDown(KeyCode.Space)&&isGrounded)
-        {
-            velocity.y += Mathf.Sqrt(jumpSeed * -2f * gravity);
-        }
-        velocity.y += gravity * Time.deltaTime;
-        controller.Move(velocity * Time.deltaTime);
+        
     }
 }
