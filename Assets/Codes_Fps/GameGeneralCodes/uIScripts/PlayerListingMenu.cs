@@ -12,10 +12,20 @@ public class PlayerListingMenu : MonoBehaviourPunCallbacks
     private PlayerListing _playerListing;
 
     private List<PlayerListing> _listing = new List<PlayerListing>();
-
+    private RoomsCanvases _roomsCanvases;
     private void Awake()
     {
         GetCurrentRoomPlayer();
+    }
+
+    public void FirstInitialize(RoomsCanvases canvases)
+    {
+        _roomsCanvases = canvases;
+
+    }
+    public override void OnLeftRoom()
+    {
+        _content.DestroyChildren();
     }
     private void GetCurrentRoomPlayer()
     {
@@ -38,6 +48,7 @@ public class PlayerListingMenu : MonoBehaviourPunCallbacks
     {
         AddPlayerListing(newPlayer);
     }
+
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
         int index = _listing.FindIndex(x => x.Player == otherPlayer);

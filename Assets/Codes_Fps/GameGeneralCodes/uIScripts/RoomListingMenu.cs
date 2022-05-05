@@ -13,14 +13,16 @@ public class RoomListingMenu : MonoBehaviourPunCallbacks
 
     private List<RoomListing> _listing = new List<RoomListing>();
     private RoomsCanvases _roomsCanvases;
-    public void FirstInitialize(RoomsCanvases canvasses)
+    public void FirstInitialize(RoomsCanvases canvases)
     {
-        _roomsCanvases = canvasses;
+        _roomsCanvases = canvases;
     }
 
     public override void OnJoinedRoom()
     {
         _roomsCanvases.CurrentRoomCanvas.Show();
+        _content.DestroyChildren();
+        _listing.Clear();
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
@@ -40,11 +42,19 @@ public class RoomListingMenu : MonoBehaviourPunCallbacks
             //added to list
             else 
             {
-                RoomListing listing = Instantiate(_roomListing, _content);
-                if (listing != null)
+                int index = _listing.FindIndex(x => x.RoomInfo.Name == info.Name);
+                if (index == -1)
                 {
-                    listing.SetRoomInfo(info);
-                    _listing.Add(listing);
+                    RoomListing listing = Instantiate(_roomListing, _content);
+                    if (listing != null)
+                    {
+                        listing.SetRoomInfo(info);
+                        _listing.Add(listing);
+                    }
+                }
+                else
+                {
+                    //gerekirse baska bir özllik eklenebilir
                 }
             }
             
