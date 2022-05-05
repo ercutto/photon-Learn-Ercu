@@ -29,6 +29,13 @@ public class PlayerListingMenu : MonoBehaviourPunCallbacks
     }
     private void GetCurrentRoomPlayer()
     {
+        if (!PhotonNetwork.IsConnected)
+        {
+            return;
+        }
+        if (PhotonNetwork.CurrentRoom == null||PhotonNetwork.CurrentRoom.Players==null)
+            return;
+
         foreach (KeyValuePair<int,Player> playerInfo in PhotonNetwork.CurrentRoom.Players)
         {
             AddPlayerListing(playerInfo.Value);
@@ -56,6 +63,16 @@ public class PlayerListingMenu : MonoBehaviourPunCallbacks
         {
             Destroy(_listing[index].gameObject);
             _listing.RemoveAt(index);
+        }
+    }
+    public void OnClick_StartGame()
+    {
+        if (PhotonNetwork.IsMasterClient)
+        {
+            PhotonNetwork.CurrentRoom.IsOpen = false;
+            PhotonNetwork.CurrentRoom.IsVisible = false;//Baskalari odayi görsun istersen iptal et
+            PhotonNetwork.LoadLevel(1);
+
         }
     }
    
