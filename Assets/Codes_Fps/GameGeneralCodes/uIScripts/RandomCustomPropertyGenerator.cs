@@ -1,18 +1,23 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RandomCustomPropertyGenerator : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private ExitGames.Client.Photon.Hashtable _myCustomProperties = new ExitGames.Client.Photon.Hashtable();
+    [SerializeField]
+    private Text _text;
+    public void OnClick_CustomRandomGeneratorButton() { SetCustomNumber(); }
 
-    // Update is called once per frame
-    void Update()
+    private void SetCustomNumber()
     {
-        
+        int result = Random.Range(0, 99);
+        _text.text = result.ToString();
+        _myCustomProperties["RandomNumber"] = result;
+
+        PhotonNetwork.SetPlayerCustomProperties(_myCustomProperties);
+        //PhotonNetwork.LocalPlayer.CustomProperties = _myCustomProperties;
     }
 }
