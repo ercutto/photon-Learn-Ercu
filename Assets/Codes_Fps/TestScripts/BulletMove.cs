@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BulletMove : MonoBehaviour
-{  
-    
+public class BulletMove : MonoBehaviour 
+{
+    public bool shooting;
     public float bulletSpeed = 100f;
     float Range = 100;
     public float damageValue = 50f;
@@ -38,6 +37,7 @@ public class BulletMove : MonoBehaviour
         
         Debug.Log("<color=yellow>Hit</color>"+otherObjectName);
     }
+   
 }
 
   

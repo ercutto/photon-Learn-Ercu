@@ -6,9 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Codes_Fps/Rooms.unity
+    path: Assets/Codes_Fps/Myscenes/Rooms.unity
     guid: 3ee54fbcfaf6d284080b17a53504f04d
   - enabled: 1
-    path: Assets/Codes_Fps/Game.unity
+    path: Assets/Codes_Fps/Myscenes/Game.unity
     guid: 25f9dab7f914bd44a9fdffa84cc3810c
   m_configObjects: {}

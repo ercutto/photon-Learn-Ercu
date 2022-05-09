@@ -12,10 +12,13 @@ public class PlayerColliders : MonoBehaviourPunCallbacks
     
     void Start()
     {
-        cards = GetComponent<Players>().Cards;
-        players = GetComponent<Players>();
-        maxHealth = cards.health;
-        currentHealth = maxHealth;
+
+            cards = GetComponent<Players>().Cards;
+            players = GetComponent<Players>();
+            maxHealth = cards.health;
+            currentHealth = maxHealth;
+
+     
     }
 
    
@@ -25,8 +28,7 @@ public class PlayerColliders : MonoBehaviourPunCallbacks
     }
     public void Damage(float damage)
     {
-        if (photonView.IsMine)
-        {
+
             if (currentHealth <= 0)
             {
                 currentHealth = 0;
@@ -38,20 +40,20 @@ public class PlayerColliders : MonoBehaviourPunCallbacks
 
             players.currentHealthHandler(currentHealth);
             Debug.Log(currentHealth);
+    
+           
 
-        }
        
         
     }
     public void Heal(float heal)
     {
-        currentHealth += heal;
-        if (currentHealth>=maxHealth)
-        {
-            currentHealth = maxHealth;
-        }
+            currentHealth += heal;
+            if (currentHealth >= maxHealth)
+            {
+                currentHealth = maxHealth;
+            }
+            players.currentHealthHandler(currentHealth);
         
-
-        players.currentHealthHandler(currentHealth);
     }
 }
