@@ -1,6 +1,4 @@
-
 using UnityEngine;
-using UnityEngine.UI;
 
 public class BulletMove : MonoBehaviour 
 {
@@ -9,21 +7,25 @@ public class BulletMove : MonoBehaviour
     float Range = 100;
     public float damageValue = 50f;
     Rigidbody rb;
+    
     Vector3 startPos;
-    public void start()
+    public void Start()
     { 
         
         rb = GetComponent<Rigidbody>();
         startPos = transform.position;
     }
+   
     private void FixedUpdate()
     {
         float distance = Vector3.Distance(startPos, transform.position);
         if (distance>Range)
         {
-            this.gameObject.SetActive(false);
+            Destroy(gameObject);
             transform.position = startPos;
         }
+       
+            
         transform.Translate(bulletSpeed * Time.deltaTime * Vector3.forward);
 
     }
@@ -33,7 +35,8 @@ public class BulletMove : MonoBehaviour
         string otherObjectName = other.gameObject.name;
         
         this.gameObject.SetActive(false);
-       
+    
+        //this.transform.position = Vector3.zero;
         
         Debug.Log("<color=yellow>Hit</color>"+otherObjectName);
     }

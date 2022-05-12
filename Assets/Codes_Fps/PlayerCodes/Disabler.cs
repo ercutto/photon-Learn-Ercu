@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Disabler : MonoBehaviourPunCallbacks
 {
-    public PhotonView Pv;
+   
     [Space]
     public Move _move;
     public Players _players;

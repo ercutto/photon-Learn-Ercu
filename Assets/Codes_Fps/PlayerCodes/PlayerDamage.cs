@@ -24,14 +24,19 @@ public class PlayerDamage : MonoBehaviourPunCallbacks
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (photonView.IsMine) {
+        if (photonView.IsMine)
+        {
             if (other.gameObject.tag == "bullet")
             {
                 bulletdamage = other.gameObject.GetComponent<BulletMove>().damageValue;
                 damageEffectsValue = bulletdamage * damageMultiplier;
                 playerColliders.Damage(damageEffectsValue);
             }
+
         }
+           
+       
+        
         
          
     }

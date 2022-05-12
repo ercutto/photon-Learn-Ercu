@@ -129,6 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db41602664abf5e4c89ed47f3b6829cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shooting: 0
   bulletSpeed: 100
   damageValue: 50
 --- !u!54 &5819886583474583263
@@ -194,7 +195,8 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 4687945918332815594}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0

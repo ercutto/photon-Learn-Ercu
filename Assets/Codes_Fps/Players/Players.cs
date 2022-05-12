@@ -1,9 +1,10 @@
 
+using Photon.Pun;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Players : MonoBehaviour
+public class Players : MonoBehaviourPunCallbacks
 {
     public Cards Cards;
 
@@ -30,14 +31,15 @@ public class Players : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        if (photonView.IsMine)
+        {
             profile = Cards.CharacterCanvas;
-            playerName = Cards.playerName;
+            playerName = MasterManager.GameSettings.NickName;
             GunName = Cards.GunName;
             health = Cards.health;
             speed = Cards.speed;
             jumpSpeed = Cards.JumpSpeed;
-            nameArea.text = Cards.playerName;
+            nameArea.text = playerName;
             speedArea.text = Cards.speed.ToString();
             healthArea.text = Cards.health.ToString();
             characterSprite.sprite = Cards.characterSprite;
@@ -47,31 +49,20 @@ public class Players : MonoBehaviour
                 ("PLAYER: {0} | GUN: {1} | HEALTH: {2} | SPEED: {3} | JUMP: {4}  ",
                 playerName, GunName, health, speed, jumpSpeed));
             //Application.targetFrameRate = 60;
-
-            profile = Cards.CharacterCanvas;
-            playerName = Cards.playerName;
-            GunName = Cards.GunName;
-            health = Cards.health;
-            speed = Cards.speed;
-            jumpSpeed = Cards.JumpSpeed;
-            nameArea.text = Cards.playerName;
-            speedArea.text = Cards.speed.ToString();
-            healthArea.text = Cards.health.ToString();
-            characterSprite.sprite = Cards.characterSprite;
-            gunSprite.sprite = Cards.gunSprite;
             _isGrounded = GetComponent<PhysicsCont>().isGrounded;
             _isWalking = GetComponent<Move>().isWalking;
             animator = GetComponent<Animator>();
-
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
- 
+        if (photonView.IsMine)
+        {
             _isGrounded = GetComponent<PhysicsCont>().isGrounded;
             _isWalking = GetComponent<Move>().isWalking;
-            if (_isGrounded&&_isWalking)
+            if (_isGrounded && _isWalking)
             {
 
                 animator.SetBool("IsWalking", true);
@@ -81,22 +72,24 @@ public class Players : MonoBehaviour
             {
                 animator.SetBool("IsWalking", false);
             }
+        }
+            
+           
 
     }
 
     public void currentHealthHandler(float current)
     {
-
-        healthArea.text = current.ToString();
-        if (current >= 0)
+        if (photonView.IsMine)
         {
+            healthArea.text = current.ToString();
+            if (current >= 0)
+            {
 
-            Debug.Log(current + " Current health is zero!");
+                Debug.Log(current + " Current health is zero!");
 
+            }
         }
-
-
-
 
     }
 

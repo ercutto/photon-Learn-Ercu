@@ -1,7 +1,8 @@
 
+using Photon.Pun;
 using UnityEngine;
 
-public class TargetPos : MonoBehaviour
+public class TargetPos : MonoBehaviourPunCallbacks
 {
     public float sensetivity = 300;
     public Transform camPos,player;
@@ -9,17 +10,17 @@ public class TargetPos : MonoBehaviour
     private float xRot=0;
     void Start()
     {
- 
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-            
-
-       
+        if (photonView.IsMine)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
     }
 
     // Update is called once per frame
     void Update()
-    {   
+{
+        if (photonView.IsMine) {
             float y = Input.GetAxis("Mouse X") * sensetivity * Time.deltaTime;
             float x = Input.GetAxis("Mouse Y") * sensetivity * Time.deltaTime;
             xRot -= x;
@@ -27,6 +28,13 @@ public class TargetPos : MonoBehaviour
             cam.transform.localRotation = Quaternion.Euler(xRot, 0f, 0f);
             cam.transform.position = camPos.transform.position;
             player.Rotate(Vector3.up * y);
+        }
+        else
+        {
+            cam.SetActive(false);
+        }
+           
+            
 
     }
 }

@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Move : MonoBehaviour
+public class Move : MonoBehaviourPunCallbacks
 {
     [SerializeField]
     private CharacterController controller;
@@ -18,21 +18,22 @@ public class Move : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        if (photonView.IsMine)
+        {
             card = GetComponent<Players>().Cards;
             isFast = false;
             speed = card.speed;
             fastSpeed = card.fastSpeed;
             controller.GetComponent<CharacterController>();
 
-
+        }
        
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (photonView.IsMine) {
             float x = Input.GetAxis("Horizontal");
             float y = Input.GetAxis("Vertical");
 
@@ -64,6 +65,9 @@ public class Move : MonoBehaviour
                 isWalking = false;
 
             }
+        }
+           
+        
         
        
 

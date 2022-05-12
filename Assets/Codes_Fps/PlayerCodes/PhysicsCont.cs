@@ -1,7 +1,8 @@
 
+using Photon.Pun;
 using UnityEngine;
 
-public class PhysicsCont : MonoBehaviour
+public class PhysicsCont : MonoBehaviourPunCallbacks
 {
     public  Vector3 velocity;
     public float gravity=-9.81f;
@@ -18,19 +19,21 @@ public class PhysicsCont : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        if (photonView.IsMine)
+        {
             cards = GetComponent<Players>().Cards;
             controller = GetComponent<CharacterController>();
             jumpSeed = cards.JumpSpeed;
-
+        }
            
 
     }
 
     // Update is called once per frame
     void Update()
-    {
-
+{
+        if (photonView.IsMine)
+        {
             isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
             if (isGrounded && velocity.y < 0)
             {
@@ -44,6 +47,9 @@ public class PhysicsCont : MonoBehaviour
             }
             velocity.y += gravity * Time.deltaTime;
             controller.Move(velocity * Time.deltaTime);
+        }
+           
+       
 
         
     }
