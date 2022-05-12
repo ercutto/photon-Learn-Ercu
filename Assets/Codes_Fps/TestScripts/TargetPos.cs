@@ -6,7 +6,7 @@ public class TargetPos : MonoBehaviourPunCallbacks
 {
     public float sensetivity = 300;
     public Transform camPos,player;
-    public GameObject cam;
+    public GameObject camHolder;
     private float xRot=0;
     void Start()
     {
@@ -25,13 +25,13 @@ public class TargetPos : MonoBehaviourPunCallbacks
             float x = Input.GetAxis("Mouse Y") * sensetivity * Time.deltaTime;
             xRot -= x;
             xRot = Mathf.Clamp(xRot, -87f, 87f);
-            cam.transform.localRotation = Quaternion.Euler(xRot, 0f, 0f);
-            cam.transform.position = camPos.transform.position;
+            camHolder.transform.localRotation = Quaternion.Euler(xRot, 0f, 0f);
+            camHolder.transform.position = camPos.transform.position;
             player.Rotate(Vector3.up * y);
         }
         else
         {
-            cam.SetActive(false);
+            camHolder.SetActive(false);
         }
            
             

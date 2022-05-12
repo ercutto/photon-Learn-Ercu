@@ -987,7 +987,7 @@ MonoBehaviour:
   sensetivity: 300
   camPos: {fileID: 3312043830150103453}
   player: {fileID: 8034808601908906947}
-  cam: {fileID: 1640274652668255021}
+  camHolder: {fileID: 1640274652668255021}
 --- !u!114 &3252311294830352876
 MonoBehaviour:
   m_ObjectHideFlags: 0
