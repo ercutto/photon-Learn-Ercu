@@ -4,80 +4,67 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Shoot : MonoBehaviourPunCallbacks, IPunObservable
+public class Shoot : MonoBehaviourPun
 {
     public GunsStat _gunStat;
     public GameObject bullet;
     public int bulletCapacity;
     public Transform[] ShotPos;
-    public bool IsFiring;
     private int Clicked;
     public Text bulletText;
 
     // Start is called before the first frame update
     void Start()
     {
-        if (photonView.IsMine)
-        {
-            bulletCapacity = _gunStat.capacity;
-            Clicked = bulletCapacity;
 
-            bulletText.text = bulletCapacity.ToString();
-            //PhotonNetwork.Instantiate(bullet.name, ShotPos[0].transform.position, ShotPos[0].transform.transform.rotation);
-        }
-    }
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {if (photonView.IsMine)
-        {
-            if (stream.IsWriting)
-            {
-                Update();
-            }
-            else
-            {
+        bulletCapacity = _gunStat.capacity;
+        Clicked = bulletCapacity;
 
-              
-            }
-        }
+        bulletText.text = bulletCapacity.ToString();
+        //PhotonNetwork.Instantiate(bullet.name, ShotPos[0].transform.position, ShotPos[0].transform.transform.rotation);
 
     }
 
     void Update()
     {
-        if (photonView.IsMine) {
-            if (Input.GetMouseButtonDown(0))
+
+        if (Input.GetMouseButtonDown(0))
+        {
+
+            if (Clicked > 0)
             {
 
-                if (Clicked > 0)
+                FireClicked();
+                Clicked--;
+                bulletCapacity -= 1;
+                bulletText.text = bulletCapacity.ToString();
+                if (Clicked <= 0)
                 {
-                    //photonView.RPC("RPC_Fire", RpcTarget.All);
-                    RPC_Fire();
-                    Clicked--;
-                    bulletCapacity -= 1;
-                    bulletText.text = bulletCapacity.ToString();
-                    if (Clicked <= 0)
-                    {
-                        bulletText.text = "Reloading";
-                        StartCoroutine(Reload());
-                    }
-
+                    bulletText.text = "Reloading";
+                    StartCoroutine(Reload());
                 }
 
-
             }
+
         }
-            
-        
+
+
+    }
+    void FireClicked()
+    {
+        photonView.RPC("RPC_Fire", RpcTarget.All);
     }
     [PunRPC]
-    void RPC_Fire() {
-
-        PhotonNetwork.Instantiate(bullet.name, ShotPos[0].transform.position, ShotPos[0].transform.transform.rotation);
-        //PhotonNetwork.Instantiate(bullet.name, ShotPos[1].transform.position, ShotPos[1].transform.transform.rotation);
-    }
-   IEnumerator Reload()
+    void RPC_Fire()
     {
-       
+       GameObject _bullet = Instantiate(bullet, ShotPos[0].transform.position, ShotPos[0].transform.transform.rotation);
+        Rigidbody _bullet_rb = _bullet.GetComponent<Rigidbody>();
+        _bullet_rb.AddForce(10000 * Time.deltaTime * ShotPos[0].transform.forward,ForceMode.Impulse);
+
+    }
+    IEnumerator Reload()
+    {
+
         yield return new WaitForSeconds(2);
         bulletCapacity = _gunStat.capacity;
         bulletText.text = bulletCapacity.ToString();
