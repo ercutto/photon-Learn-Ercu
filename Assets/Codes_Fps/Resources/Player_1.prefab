@@ -901,7 +901,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 8034808601908906948}
-  card: {fileID: 11400000, guid: 4530ca3305ef2ae489d884180a95e899, type: 2}
+  card: {fileID: 0}
   speed: 0
   isFast: 0
   fastSpeed: 0
@@ -927,7 +927,7 @@ MonoBehaviour:
     m_Bits: 1024
   isGrounded: 0
   controller: {fileID: 0}
-  cards: {fileID: 11400000, guid: 4530ca3305ef2ae489d884180a95e899, type: 2}
+  cards: {fileID: 0}
   jumpSeed: 0
 --- !u!114 &5836181912603165562
 MonoBehaviour:

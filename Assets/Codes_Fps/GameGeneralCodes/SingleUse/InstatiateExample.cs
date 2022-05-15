@@ -6,8 +6,13 @@ public class InstatiateExample : MonoBehaviour
 {
     [SerializeField]
     private GameObject _prefab;
+    public Cards SelectedCard;
+
     private void Awake()
     {
-        MasterManager.NetworkInstantiate(_prefab, transform.position, Quaternion.identity);
+       GameObject _PlayerSelection = MasterManager.NetworkInstantiate(_prefab, transform.position, Quaternion.identity);
+        _PlayerSelection.GetComponent<Players>().Cards=MasterManager.card;
+
+
     }
 }

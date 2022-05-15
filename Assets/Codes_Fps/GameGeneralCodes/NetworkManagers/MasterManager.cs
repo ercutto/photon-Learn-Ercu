@@ -13,7 +13,7 @@ public class MasterManager : ScriptableObjectSingleton<MasterManager>
     public static GameSettings GameSettings { get { return Instance._gameSettings; } }
     [SerializeField]
     private List<NetworkPrefab> _networkedPrefabs = new List<NetworkPrefab>();
-
+    public static  Cards card = null;
     public static GameObject NetworkInstantiate(GameObject obj, Vector3 position, Quaternion rotatiton)
     {
         foreach (NetworkPrefab networkPrefab in Instance._networkedPrefabs)

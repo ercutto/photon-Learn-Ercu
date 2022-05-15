@@ -5,15 +5,16 @@ using UnityEngine;
 
 public class PlayerColliders : MonoBehaviourPunCallbacks
 {
-    public Cards cards;
+    [SerializeField]
+    private Cards cards;
     public float maxHealth;
     public float currentHealth;
     private Players players;
 
     void Start()
     {
-
-        cards = GetComponent<Players>().Cards;
+        if (!cards) { cards = GetComponent<Players>().Cards; }
+        
         players = GetComponent<Players>();
         maxHealth = cards.health;
         currentHealth = maxHealth;

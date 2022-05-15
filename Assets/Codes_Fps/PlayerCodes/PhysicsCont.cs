@@ -14,13 +14,14 @@ public class PhysicsCont : MonoBehaviourPunCallbacks
     public bool isGrounded;
 
     public CharacterController controller;
-    public Cards cards;
+    [SerializeField]
+    private Cards cards;
     public float jumpSeed;
     // Start is called before the first frame update
     void Start()
     {
-
-        cards = GetComponent<Players>().Cards;
+        if (!cards) { cards = GetComponent<Players>().Cards; }
+        
         controller = GetComponent<CharacterController>();
         jumpSeed = cards.JumpSpeed;
 

@@ -8,7 +8,8 @@ public class Move : MonoBehaviourPunCallbacks
 {
     [SerializeField]
     private CharacterController controller;
-    public Cards card;
+    [SerializeField]
+    private Cards card;
     [SerializeField]
     protected float speed;
     public bool isFast;
@@ -18,8 +19,8 @@ public class Move : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
+        if (!card) { card = GetComponent<Players>().Cards; }
 
-        card = GetComponent<Players>().Cards;
         isFast = false;
         speed = card.speed;
         fastSpeed = card.fastSpeed;
