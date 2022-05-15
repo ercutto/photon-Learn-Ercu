@@ -31,6 +31,11 @@ public class PhysicsCont : MonoBehaviourPunCallbacks
     {
 
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        CheckPhysics();
+       
+    }
+    void CheckPhysics()
+    {
         if (isGrounded && velocity.y < 0)
         {
             velocity.y = -2f;
