@@ -6,9 +6,11 @@ using UnityEngine.UI;
 
 public class Shoot : MonoBehaviourPun
 {
-    public GunsStat _gunStat;
+    public Players players;
     public GameObject bullet;
     public int bulletCapacity;
+    private float reloadTime;
+    private float repeatTime;
     public Transform[] ShotPos;
     private int Clicked;
     public Text bulletText;
@@ -16,8 +18,10 @@ public class Shoot : MonoBehaviourPun
     // Start is called before the first frame update
     void Start()
     {
-
-        bulletCapacity = _gunStat.capacity;
+        if (!players) {players= GetComponent<Players>(); }
+        reloadTime = players.GunReloadTime;
+        repeatTime = players.gunRepeatTime;
+        bulletCapacity =players.gunCapacity;
         Clicked = bulletCapacity;
 
         bulletText.text = bulletCapacity.ToString();
@@ -27,14 +31,15 @@ public class Shoot : MonoBehaviourPun
 
     void Update()
     {
-
-        if (Input.GetMouseButtonDown(0))
+        repeatTime -= Time.deltaTime;
+        if (Input.GetMouseButton(0)&&repeatTime<=0)
         {
-
+            repeatTime = players.gunRepeatTime;
             if (Clicked > 0)
             {
 
                 FireClicked();
+                
                 Clicked--;
                 bulletCapacity -= 1;
                 bulletText.text = bulletCapacity.ToString();
@@ -65,8 +70,8 @@ public class Shoot : MonoBehaviourPun
     IEnumerator Reload()
     {
 
-        yield return new WaitForSeconds(2);
-        bulletCapacity = _gunStat.capacity;
+        yield return new WaitForSeconds(reloadTime);
+        bulletCapacity = players.gunCapacity;
         bulletText.text = bulletCapacity.ToString();
         Clicked = bulletCapacity;
     }

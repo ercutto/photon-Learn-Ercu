@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3de4f886d264d2b428feab15e58f553a, type: 3}
+  m_Name: MachineGun
+  m_EditorClassIdentifier: 
+  gunPrefab: {fileID: 5562202643777277476, guid: c7d92b58611e25446bce508f8de53534, type: 3}
+  bullertPrefab: {fileID: 3274314153841052315, guid: f714ad265a6e3204f9ae116caa747800, type: 3}
+  gunsSprite: {fileID: 0}
+  gunName: MachineGun
+  capacity: 100
+  reloadTime: 5
+  repeatTime: 0.2
+  range: 50

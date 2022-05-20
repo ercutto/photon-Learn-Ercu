@@ -20,4 +20,5 @@ MonoBehaviour:
   speed: 7
   JumpSpeed: 8
   fastSpeed: 12
+  Gun: {fileID: 11400000, guid: b762df21b4c037d40b9c547f368f04ae, type: 2}
   CharacterCanvas: {fileID: 713076688445566405, guid: 9315272d63bab9549a2be6eb26b955b5, type: 3}

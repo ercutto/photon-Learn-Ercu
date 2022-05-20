@@ -7,9 +7,18 @@ using UnityEngine.UI;
 public class Players : MonoBehaviourPunCallbacks
 {
     public Cards Cards;
-
+    public GunsStat guns;
     public string playerName;
+    //gun
     public string GunName;
+    public float GunReloadTime;
+    public int gunCapacity;
+    public float gunRange;
+    public float gunRepeatTime;
+    public GameObject gunPrefab;
+
+    public GameObject [] myGuns;
+    public Transform RigthHandGunHolder;
     public Image characterSprite;
     public Image gunSprite;
     public float health;
@@ -34,7 +43,7 @@ public class Players : MonoBehaviourPunCallbacks
 
         profile = Cards.CharacterCanvas;
         playerName = MasterManager.GameSettings.NickName;
-        GunName = Cards.GunName;
+        //GunName = Cards.GunName;
         health = Cards.health;
         speed = Cards.speed;
         jumpSpeed = Cards.JumpSpeed;
@@ -42,7 +51,14 @@ public class Players : MonoBehaviourPunCallbacks
         speedArea.text = Cards.speed.ToString();
         healthArea.text = Cards.health.ToString();
         characterSprite.sprite = Cards.characterSprite;
-        gunSprite.sprite = Cards.gunSprite;
+        //gunSprite.sprite = Cards.gunSprite;
+        GunName = guns.gunName;
+        gunSprite.sprite = guns.gunsSprite;
+        gunCapacity = guns.capacity;
+        gunPrefab = guns.gunPrefab;
+        gunRange = guns.range;
+        gunRepeatTime = guns.repeatTime;
+        GunReloadTime = guns.repeatTime;
 
         Debug.Log(string.Format
             ("PLAYER: {0} | GUN: {1} | HEALTH: {2} | SPEED: {3} | JUMP: {4}  ",
@@ -51,6 +67,20 @@ public class Players : MonoBehaviourPunCallbacks
         _isGrounded = GetComponent<PhysicsCont>().isGrounded;
         _isWalking = GetComponent<Move>().isWalking;
         animator = GetComponent<Animator>();
+        //Selected Gun
+        //GameObject selectedGun=PhotonNetwork.Instantiate(gunPrefab.name, RigthHandGunHolder.position, RigthHandGunHolder.rotation);
+        //GameObject selectedGun = MasterManager.NetworkInstantiate(gunPrefab, RigthHandGunHolder.position, RigthHandGunHolder.rotation);
+        //selectedGun.transform.SetParent(RigthHandGunHolder);
+        for (int i = 0; i < myGuns.Length; i++)
+        {
+            if (myGuns[i].name != GunName) { myGuns[i].SetActive(false); } else
+            {
+                myGuns[i].SetActive(true);
+            }
+        }
+        
+       
+        
 
     }
 
@@ -86,5 +116,6 @@ public class Players : MonoBehaviourPunCallbacks
         }
 
     }
+    
 
 }

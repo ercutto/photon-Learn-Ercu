@@ -6,6 +6,7 @@ public class GunsStat : ScriptableObject
 {
     public GameObject gunPrefab;
     public GameObject bullertPrefab;
+    public Sprite gunsSprite;
     public string gunName;
     [SerializeField]
     public int capacity;
