@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunPrefab: {fileID: 5562202643777277476, guid: 43299888c65a7984abcb3c37e2a9f6d8, type: 3}
   bullertPrefab: {fileID: 3274314153841052315, guid: f714ad265a6e3204f9ae116caa747800, type: 3}
-  gunsSprite: {fileID: 21300000, guid: c222cd02c447941edb09ecb6433229ce, type: 3}
+  gunsSprite: {fileID: 21300000, guid: 1300808022346e548998a93e2cb19ea1, type: 3}
   gunName: Rifle
   capacity: 2
   reloadTime: 2

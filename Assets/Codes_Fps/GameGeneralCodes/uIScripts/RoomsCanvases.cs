@@ -13,6 +13,9 @@ public class RoomsCanvases : MonoBehaviour
     private CurrentRoomCanvas _currentRoomCanvas;
 
     public CurrentRoomCanvas CurrentRoomCanvas { get { return _currentRoomCanvas; } }
+
+  
+
     private void Awake()
     {
         FirstInitialize();

@@ -12,6 +12,8 @@ public class CreateRoomMenu : MonoBehaviourPunCallbacks
     private Text _roomName;
 
     private RoomsCanvases _roomsCanvases;
+    [SerializeField]
+   
     public void FirstInitialize(RoomsCanvases canvasses)
     {
         _roomsCanvases = canvasses;
@@ -27,10 +29,11 @@ public class CreateRoomMenu : MonoBehaviourPunCallbacks
         options.MaxPlayers = 6;
         PhotonNetwork.JoinOrCreateRoom(_roomName.text, options, TypedLobby.Default);
     }
+
     public override void OnCreatedRoom()
     {
         Debug.Log("Room created Succesfully" + this);
-        _roomsCanvases.CurrentRoomCanvas.Show();
+       _roomsCanvases.CurrentRoomCanvas.Show();
     }
     public override void OnCreateRoomFailed(short returnCode, string message)
     {

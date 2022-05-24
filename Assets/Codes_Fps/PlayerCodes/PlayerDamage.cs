@@ -13,7 +13,7 @@ public class PlayerDamage : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
-        Player = transform.parent.parent.gameObject;
+        Player = transform.parent.parent.parent.gameObject;
         playerColliders=Player.GetComponent<PlayerColliders>();
     }
 
