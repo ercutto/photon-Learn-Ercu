@@ -25,7 +25,7 @@ public class Disabler : MonoBehaviourPunCallbacks
             _physicsCont.enabled = true;
             _playerColliders.enabled = true;
             _cam.GetComponent<Camera>().enabled = true;
-
+            _cam.GetComponent<AudioListener>().enabled = true;
             _targetPos.enabled = true;
             for (int i = 0; i < ShotScripts.Count; i++)
             {
@@ -44,6 +44,7 @@ public class Disabler : MonoBehaviourPunCallbacks
             _physicsCont.enabled = false;
             _playerColliders.enabled = false;
             _cam.GetComponent<Camera>().enabled = false;
+            _cam.GetComponent<AudioListener>().enabled = true;
             _targetPos.enabled = false;
             for (int i = 0; i < ShotScripts.Count; i++)
             {
