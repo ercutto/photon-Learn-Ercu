@@ -41,6 +41,7 @@ MonoBehaviour:
   - RespawnSpaceship
   - FixedUpdate
   - RPC_Fire
+  - SenMyColorInfo
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
