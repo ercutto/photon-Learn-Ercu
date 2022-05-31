@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Photon.Pun.UtilityScripts;
 
 public class PlayerListingMenu : MonoBehaviourPunCallbacks
 {
@@ -16,11 +17,13 @@ public class PlayerListingMenu : MonoBehaviourPunCallbacks
     private bool _ready = false;
     private List<PlayerListing> _listing = new List<PlayerListing>();
     private RoomsCanvases _roomsCanvases;
+    
     //ekleme
     [SerializeField]
     private CharacterSelectMenuController _characterSelectMenuController;
     public CharacterSelectMenuController CharacterSelectMenuController { get { return _characterSelectMenuController; } }
     //bitti
+    public bool team1;
     private void Awake()
     {
         GetCurrentRoomPlayer();
@@ -131,6 +134,14 @@ public class PlayerListingMenu : MonoBehaviourPunCallbacks
         {
             _listing[index].Ready = ready;
           
+        }
+    }
+    public void SelcetGameMode(int mode)
+    {
+        if (PhotonNetwork.LocalPlayer.IsLocal)
+        {
+            MasterManager.nextPlayersTeam = mode;
+         
         }
     }
 

@@ -10,11 +10,14 @@ public class PlayerDamage : MonoBehaviourPunCallbacks
     private float damageEffectsValue;
     public GameObject Player;
     public PlayerColliders playerColliders;
+    public TeamViewer teamViewer;
+    public int myTeam;
     // Start is called before the first frame update
     void Start()
     {
         Player = transform.parent.parent.parent.gameObject;
         playerColliders=Player.GetComponent<PlayerColliders>();
+        myTeam = teamViewer.myTeam;
     }
 
     // Update is called once per frame
@@ -28,9 +31,19 @@ public class PlayerDamage : MonoBehaviourPunCallbacks
         {
             if (other.gameObject.tag == "bullet")
             {
-                bulletdamage = other.gameObject.GetComponent<BulletMove>().damageValue;
-                damageEffectsValue = bulletdamage * damageMultiplier;
-                playerColliders.Damage(damageEffectsValue);
+                if (other.gameObject.GetComponent<BulletMove>()!=null)
+                {
+                    BulletMove bulletMove = other.gameObject.GetComponent<BulletMove>();
+                    int team = bulletMove.team;
+                    if (team != myTeam)
+                    {
+                        bulletdamage = bulletMove.damageValue;
+                        damageEffectsValue = bulletdamage * damageMultiplier;
+                        playerColliders.Damage(damageEffectsValue);
+                    }
+                   
+                }   
+                
             }
 
         }

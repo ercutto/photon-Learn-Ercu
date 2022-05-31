@@ -552,6 +552,8 @@ MonoBehaviour:
   damageMultiplier: 2
   Player: {fileID: 0}
   playerColliders: {fileID: 0}
+  teamViewer: {fileID: 3830975412301708308}
+  myTeam: 0
 --- !u!1 &6084020033329636187
 GameObject:
   m_ObjectHideFlags: 0
@@ -599,6 +601,8 @@ MonoBehaviour:
   damageMultiplier: 0.5
   Player: {fileID: 0}
   playerColliders: {fileID: 0}
+  teamViewer: {fileID: 3830975412301708308}
+  myTeam: 0
 --- !u!136 &9095832805133934301
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -673,6 +677,8 @@ MonoBehaviour:
   damageMultiplier: 0.1
   Player: {fileID: 0}
   playerColliders: {fileID: 0}
+  teamViewer: {fileID: 3830975412301708308}
+  myTeam: 0
 --- !u!1 &7051758327696834602
 GameObject:
   m_ObjectHideFlags: 0
@@ -797,6 +803,8 @@ MonoBehaviour:
   damageMultiplier: 0.1
   Player: {fileID: 0}
   playerColliders: {fileID: 0}
+  teamViewer: {fileID: 3830975412301708308}
+  myTeam: 0
 --- !u!1 &8034808600673646307
 GameObject:
   m_ObjectHideFlags: 0
@@ -1296,6 +1304,8 @@ MonoBehaviour:
   ShotPos:
   - {fileID: 1416377915901343416}
   bulletText: {fileID: 3691253869565667620}
+  teamViewer: {fileID: 3830975412301708308}
+  _myTeam: 0
 --- !u!114 &2783634983637323085
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1327,8 +1337,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Indicator: {fileID: 4377879408703436980}
-  myId: 0
+  myTeam: 0
   myIdtext: {fileID: 2958250256565507663}
+  mycolor: 0
 --- !u!1 &8145804886158320575
 GameObject:
   m_ObjectHideFlags: 0
@@ -1389,6 +1400,8 @@ MonoBehaviour:
   damageMultiplier: 0.2
   Player: {fileID: 0}
   playerColliders: {fileID: 0}
+  teamViewer: {fileID: 3830975412301708308}
+  myTeam: 0
 --- !u!1 &8341518576719823782
 GameObject:
   m_ObjectHideFlags: 0
@@ -1449,6 +1462,8 @@ MonoBehaviour:
   damageMultiplier: 0.2
   Player: {fileID: 0}
   playerColliders: {fileID: 0}
+  teamViewer: {fileID: 3830975412301708308}
+  myTeam: 0
 --- !u!1 &8469888556085478430
 GameObject:
   m_ObjectHideFlags: 0

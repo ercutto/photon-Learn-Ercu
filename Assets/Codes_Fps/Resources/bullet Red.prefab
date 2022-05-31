@@ -93,9 +93,9 @@ GameObject:
   - component: {fileID: 5563169552527443261}
   - component: {fileID: 5819886583474583263}
   - component: {fileID: 436763245890903388}
-  - component: {fileID: 7072401832313341646}
+  - component: {fileID: 2961497472271901105}
   m_Layer: 7
-  m_Name: bullet
+  m_Name: bullet Red
   m_TagString: bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -131,7 +131,7 @@ MonoBehaviour:
   shooting: 0
   bulletSpeed: 100
   damageValue: 50
-  team: 1
+  team: 2
 --- !u!54 &5819886583474583263
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -161,7 +161,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.3, y: 0.29, z: 0.58}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7072401832313341646
+--- !u!114 &2961497472271901105
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

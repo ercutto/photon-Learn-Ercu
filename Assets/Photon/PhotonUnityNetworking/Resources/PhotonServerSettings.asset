@@ -42,6 +42,10 @@ MonoBehaviour:
   - FixedUpdate
   - RPC_Fire
   - SenMyColorInfo
+  - SendMyColorInfo
+  - SendMyColorInfoRed
+  - RPC_GetTeam
+  - RPC_SentTeam
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

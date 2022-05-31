@@ -15,6 +15,7 @@ public class MasterManager : ScriptableObjectSingleton<MasterManager>
     private List<NetworkPrefab> _networkedPrefabs = new List<NetworkPrefab>();
     public static  Cards card = null;
     public static GunsStat gunStat = null;
+    public static int nextPlayersTeam;
     public static GameObject NetworkInstantiate(GameObject obj, Vector3 position, Quaternion rotatiton)
     {
         foreach (NetworkPrefab networkPrefab in Instance._networkedPrefabs)
@@ -35,6 +36,17 @@ public class MasterManager : ScriptableObjectSingleton<MasterManager>
             }
         }
         return null;
+    }
+    public static void UpdateTeam()
+    {
+        if (nextPlayersTeam==1)
+        {
+            nextPlayersTeam = 2;
+        }
+        else
+        {
+            nextPlayersTeam = 1;
+        }
     }
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     public static void PopulateNetworkPrefabs()

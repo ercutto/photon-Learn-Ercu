@@ -4,35 +4,39 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TeamViewer : MonoBehaviourPunCallbacks
+
+public class TeamViewer : MonoBehaviourPun
 {
     public Image Indicator;
-    public int myId;
+    public int myTeam;
     public Text myIdtext;
+    public bool mycolor;
+    
     private InstatiateExample Instantiator;
- 
+
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-       
+
         if (photonView.IsMine)
         {
-            Instantiator = GameObject.Find("Instantiation").GetComponent<InstatiateExample>();
-            
-            photonView.RPC("SenMyColorInf", RpcTarget.All);
+            photonView.RPC("RPC_GetTeam", RpcTarget.MasterClient);
         }
-        
     }
-
-    // Update is called once per frame
-    void Update()
+    //void update()
+    //{
+    //    //if(myTeam==1)
+    //}
+    [PunRPC]
+    void RPC_GetTeam()
     {
-        
+        myTeam = MasterManager.nextPlayersTeam;
+        MasterManager.UpdateTeam();
+        photonView.RPC("RPC_SentTeam",RpcTarget.OthersBuffered,myTeam);
     }
     [PunRPC]
-    void SenMyColorInfo()
+    void RPC_SentTeam(int WhichTeam)
     {
-        Indicator.color = Color.blue;
-        myIdtext.text = myId.ToString();
+        myTeam = WhichTeam;
     }
 }

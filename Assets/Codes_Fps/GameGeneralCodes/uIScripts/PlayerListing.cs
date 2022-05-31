@@ -35,6 +35,7 @@ public class PlayerListing : MonoBehaviourPunCallbacks
             result = (int)player.CustomProperties["RandomNumber"];
         _text.text = result.ToString() + ", " + player.NickName;
     }
-
+    //eklenti
+  
 
 }
