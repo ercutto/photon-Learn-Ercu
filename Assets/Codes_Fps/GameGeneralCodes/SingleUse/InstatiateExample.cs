@@ -11,7 +11,7 @@ public class InstatiateExample : MonoBehaviour
     public Transform[] single;
     public Transform[] blueTeam;
     public Transform[] redTeam;
-    public List<GameObject> AllPlayers;
+    //public List<GameObject> AllPlayers;
     public Transform FinalSpawnPos;
     public GunsStat gun;
     public static int _myId;
@@ -31,7 +31,7 @@ public class InstatiateExample : MonoBehaviour
             SpawnMode(_prefab, blueTeam, 1);
             
         }
-        else
+        if(_myId==2)
         {
             SpawnMode(_prefab, redTeam, 2);
            
@@ -69,7 +69,7 @@ public class InstatiateExample : MonoBehaviour
         _PlayerSelection.GetComponent<Players>().guns = MasterManager.gunStat;
        
         _PlayerSelection.GetComponent<TeamViewer>().myTeam = _myId;
-        AllPlayers.Add(_PlayerSelection);
+        //AllPlayers.Add(_PlayerSelection);
     }
 
     

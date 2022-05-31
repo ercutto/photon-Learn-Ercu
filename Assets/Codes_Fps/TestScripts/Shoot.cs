@@ -66,7 +66,7 @@ public class Shoot : MonoBehaviourPun
     {
        GameObject _bullet = Instantiate(bullet, ShotPos[0].transform.position, ShotPos[0].transform.transform.rotation);
         Rigidbody _bullet_rb = _bullet.GetComponent<Rigidbody>();
-        
+        _bullet.GetComponent<BulletMove>().team = _myTeam;
         _bullet_rb.AddForce(10000 * Time.deltaTime * ShotPos[0].transform.forward,ForceMode.Impulse);
 
     }

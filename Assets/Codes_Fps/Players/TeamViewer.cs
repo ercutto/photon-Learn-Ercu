@@ -20,19 +20,30 @@ public class TeamViewer : MonoBehaviourPun
 
         if (photonView.IsMine)
         {
-            photonView.RPC("RPC_GetTeam", RpcTarget.MasterClient);
+            photonView.RPC("RPC_GetTeam", RpcTarget.AllBuffered);
+            //photonView.RPC("RPC_GetTeam", RpcTarget.MasterClient);
         }
+        
     }
-    //void update()
-    //{
-    //    //if(myTeam==1)
-    //}
+ 
     [PunRPC]
     void RPC_GetTeam()
     {
         myTeam = MasterManager.nextPlayersTeam;
+        GetComponent<Shoot>()._myTeam = myTeam;
+        if (myTeam == 1)
+        {
+            myIdtext.text = "Blue";
+            Indicator.color = Color.blue;
+        }
+        else
+        {
+            myIdtext.text = "Red";
+            Indicator.color = Color.red;
+        }
         MasterManager.UpdateTeam();
-        photonView.RPC("RPC_SentTeam",RpcTarget.OthersBuffered,myTeam);
+        photonView.RPC("RPC_SentTeam",RpcTarget.AllBuffered,myTeam);
+        //photonView.RPC("RPC_SentTeam",RpcTarget.OthersBuffered,myTeam);
     }
     [PunRPC]
     void RPC_SentTeam(int WhichTeam)
