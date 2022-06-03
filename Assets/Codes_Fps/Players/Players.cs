@@ -31,6 +31,13 @@ public class Players : MonoBehaviourPunCallbacks
     private bool _isGrounded;
     private bool _isWalking;
     private Animator animator;
+
+    public Image Indicator, NameBar;
+    public int myTeam;
+    public Text myIdtext;
+    public bool _blueteam;
+    private InstatiateExample instatiateExample;
+    public Vector3 startPos;
     [Tooltip("The local player instance. Use this to know if the local player is represented in the Scene")]
     public static GameObject LocalPlayerInstance;
     public void Awake()
@@ -59,7 +66,8 @@ public class Players : MonoBehaviourPunCallbacks
         gunRange = guns.range;
         gunRepeatTime = guns.repeatTime;
         GunReloadTime = guns.repeatTime;
-
+        
+        
         Debug.Log(string.Format
             ("PLAYER: {0} | GUN: {1} | HEALTH: {2} | SPEED: {3} | JUMP: {4}  ",
             playerName, GunName, health, speed, jumpSpeed));
@@ -78,9 +86,9 @@ public class Players : MonoBehaviourPunCallbacks
                 myGuns[i].SetActive(true);
             }
         }
-        
-       
-        
+        instatiateExample = GameObject.Find("Instantiation").GetComponent<InstatiateExample>();
+
+        startPos = transform.position;
 
     }
 
@@ -112,10 +120,28 @@ public class Players : MonoBehaviourPunCallbacks
         {
 
             Debug.Log(current + " Current health is zero!");
+            if (current == 0)
+            {
+                //Destroy(gameObject);
+                transform.position = startPos;
+                if (myTeam == 1)
+                {
+                    PhotonNetwork.Destroy(this.gameObject);
+                    instatiateExample.Respawnblue();
+                }
+                else
+                {
+                    PhotonNetwork.Destroy(this.gameObject);
+                    instatiateExample.RespawnRed();
+                }
 
+            }
         }
 
     }
-    
+   
+
+   
+
 
 }

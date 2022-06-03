@@ -46,6 +46,10 @@ MonoBehaviour:
   - SendMyColorInfoRed
   - RPC_GetTeam
   - RPC_SentTeam
+  - Colors
+  - ColorsRed
+  - RPC_Color
+  - RPC_Color_Red
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

@@ -17,7 +17,7 @@ public class PlayerDamage : MonoBehaviourPunCallbacks
     {
         Player = transform.parent.parent.parent.gameObject;
         playerColliders=Player.GetComponent<PlayerColliders>();
-        myTeam = teamViewer.myTeam;
+        
     }
 
     // Update is called once per frame

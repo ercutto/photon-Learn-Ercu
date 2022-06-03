@@ -10,6 +10,7 @@ public class PlayerColliders : MonoBehaviourPunCallbacks
     public float maxHealth;
     public float currentHealth;
     private Players players;
+    
 
     void Start()
     {
@@ -18,7 +19,7 @@ public class PlayerColliders : MonoBehaviourPunCallbacks
         players = GetComponent<Players>();
         maxHealth = cards.health;
         currentHealth = maxHealth;
-
+        
     }
 
 
@@ -59,6 +60,7 @@ public class PlayerColliders : MonoBehaviourPunCallbacks
             currentHealth = maxHealth;
         }
         players.currentHealthHandler(currentHealth);
+       
 
     }
 }

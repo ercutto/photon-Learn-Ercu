@@ -13,7 +13,7 @@ public class Cards : ScriptableObject
     public float JumpSpeed;
     public float fastSpeed;
     public GunsStat Gun;
-    
+    public int blueTeam;
     public GameObject CharacterCanvas;
     public void start()
     {

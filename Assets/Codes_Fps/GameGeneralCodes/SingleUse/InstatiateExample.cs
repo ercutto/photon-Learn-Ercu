@@ -1,11 +1,12 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InstatiateExample : MonoBehaviour
+public class InstatiateExample : MonoBehaviourPunCallbacks
 {
     [SerializeField]
-    private GameObject _prefab;
+    private GameObject _prefab,_redTeam;
     public GameObject bullet;
     public Cards SelectedCard;
     public Transform[] single;
@@ -33,7 +34,7 @@ public class InstatiateExample : MonoBehaviour
         }
         if(_myId==2)
         {
-            SpawnMode(_prefab, redTeam, 2);
+            SpawnMode(_redTeam, redTeam, 2);
            
         }
     
@@ -54,7 +55,15 @@ public class InstatiateExample : MonoBehaviour
     //        break;
     //    }
     }
-    void SpawnMode(GameObject toSpawn,Transform[] WhereToSpawn,int _myId)
+    public void Respawnblue()
+    {
+        SpawnMode(_prefab, blueTeam, 1);
+    }
+    public void RespawnRed()
+    {
+        SpawnMode(_prefab, blueTeam, 1);
+    }
+    public void SpawnMode(GameObject toSpawn,Transform[] WhereToSpawn,int _myId)
     {
         
         for (int spawnPos = 0; spawnPos < WhereToSpawn.Length; spawnPos++)
@@ -67,10 +76,28 @@ public class InstatiateExample : MonoBehaviour
         GameObject _PlayerSelection = MasterManager.NetworkInstantiate(toSpawn, FinalSpawnPos.position, FinalSpawnPos.rotation);
         _PlayerSelection.GetComponent<Players>().Cards = MasterManager.card;
         _PlayerSelection.GetComponent<Players>().guns = MasterManager.gunStat;
-       
         _PlayerSelection.GetComponent<TeamViewer>().myTeam = _myId;
+       
         //AllPlayers.Add(_PlayerSelection);
     }
 
-    
+    public static void UpdateTeam()
+    {
+        if (_myId == 1)
+        {
+            _myId = 2;
+        }
+        else
+        {
+            _myId = 1;
+        }
+    }
+    public override void OnJoinedRoom()
+    {
+        foreach (var Player in PhotonNetwork.PlayerList)
+        {
+            Debug.Log(Player.NickName);
+        }
+       
+    }
 }
