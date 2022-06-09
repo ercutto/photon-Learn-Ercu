@@ -12,11 +12,12 @@ public class InstatiateExample : MonoBehaviourPunCallbacks
     public Transform[] single;
     public Transform[] blueTeam;
     public Transform[] redTeam;
+    
     //public List<GameObject> AllPlayers;
     public Transform FinalSpawnPos;
     public GunsStat gun;
     public static int _myId;
-
+   
     
 
     private void Awake()
@@ -26,7 +27,7 @@ public class InstatiateExample : MonoBehaviourPunCallbacks
         // _PlayerSelection.GetComponent<Players>().guns = MasterManager.gunStat;
         // _myId = MasterManager.teamNumber;
         _myId = MasterManager.nextPlayersTeam;
-        //SwitchMode(_myId);
+ 
         if (_myId==1)
         {
             SpawnMode(_prefab, blueTeam, 1);
@@ -34,26 +35,15 @@ public class InstatiateExample : MonoBehaviourPunCallbacks
         }
         if(_myId==2)
         {
-            SpawnMode(_redTeam, redTeam, 2);
+            SpawnMode(_redTeam, redTeam, 1);
            
         }
     
-    //public void SwitchMode(int Number)
-    //{
-    //    switch (Number)
-	   // {
-    //        case 1:
-    //            SpawnMode(_prefab, blueTeam,1);
-    //            break;
-    //        case 2:
-    //            SpawnMode(_prefab, redTeam,2);
-    //            break;
-    //        case 3:
-    //            SpawnMode(_prefab, single,3);
-    //            break;
-    //        default:
-    //        break;
-    //    }
+
+    }
+    public void Start()
+    {
+        
     }
     public void Respawnblue()
     {
@@ -61,7 +51,7 @@ public class InstatiateExample : MonoBehaviourPunCallbacks
     }
     public void RespawnRed()
     {
-        SpawnMode(_prefab, blueTeam, 1);
+        SpawnMode(_redTeam, redTeam, 2);
     }
     public void SpawnMode(GameObject toSpawn,Transform[] WhereToSpawn,int _myId)
     {
@@ -78,6 +68,7 @@ public class InstatiateExample : MonoBehaviourPunCallbacks
         _PlayerSelection.GetComponent<Players>().guns = MasterManager.gunStat;
         _PlayerSelection.GetComponent<TeamViewer>().myTeam = _myId;
        
+
         //AllPlayers.Add(_PlayerSelection);
     }
 
@@ -92,12 +83,6 @@ public class InstatiateExample : MonoBehaviourPunCallbacks
             _myId = 1;
         }
     }
-    public override void OnJoinedRoom()
-    {
-        foreach (var Player in PhotonNetwork.PlayerList)
-        {
-            Debug.Log(Player.NickName);
-        }
-       
-    }
+    
+    
 }

@@ -17,11 +17,12 @@ public class PlayerListingMenu : MonoBehaviourPunCallbacks
     private bool _ready = false;
     private List<PlayerListing> _listing = new List<PlayerListing>();
     private RoomsCanvases _roomsCanvases;
-    
+   
     //ekleme
     [SerializeField]
     private CharacterSelectMenuController _characterSelectMenuController;
     public CharacterSelectMenuController CharacterSelectMenuController { get { return _characterSelectMenuController; } }
+  
     //bitti
     public bool team1;
     private void Awake()
@@ -32,7 +33,24 @@ public class PlayerListingMenu : MonoBehaviourPunCallbacks
     {
         base.OnEnable();
         SetReadyUp(false);
+        //ek
+        PhotonTeamsManager.PlayerLeftTeam += OnPlayerLeftTeam;
+        PhotonTeamsManager.PlayerJoinedTeam += OnPlayerJoinedTeam;
     }
+    private void OnPlayerLeftTeam(Player player, PhotonTeam team)
+    {
+        Debug.LogFormat("Player {0} left team {1}", player, team);
+    }
+    private void OnPlayerJoinedTeam(Player player, PhotonTeam team)
+    {
+        Debug.LogFormat("Player {0} joined team {1}", player, team);
+    }
+    //private void OnDisable()
+    //{
+    //    PhotonTeamsManager.PlayerLeftTeam -= OnPlayerLeftTeam;
+    //    PhotonTeamsManager.PlayerJoinedTeam -= OnPlayerJoinedTeam;
+    //}
+    //ekbitti
     public void FirstInitialize(RoomsCanvases canvases)
     {
         _roomsCanvases = canvases;
@@ -93,6 +111,8 @@ public class PlayerListingMenu : MonoBehaviourPunCallbacks
             Destroy(_listing[index].gameObject);
             _listing.RemoveAt(index);
         }
+        //ekleme
+    
     }
     
     public void OnClick_StartGame()
@@ -141,8 +161,31 @@ public class PlayerListingMenu : MonoBehaviourPunCallbacks
         if (PhotonNetwork.LocalPlayer.IsLocal)
         {
             MasterManager.nextPlayersTeam = mode;
-         
+            //if (mode == 1)
+            //{
+            //    PhotonNetwork.LocalPlayer.JoinTeam("Blue");
+            //}
+            //else
+            //{
+            //    PhotonNetwork.LocalPlayer.JoinTeam("Red");
+            //    Debug.Log(PhotonNetwork.LocalPlayer.GetPhotonTeam());
+            //}
+
+
         }
     }
+    private void Update()
+    {
+
+        if (PhotonNetwork.LocalPlayer.GetPhotonTeam() != null)
+        {
+            Debug.Log(PhotonNetwork.LocalPlayer.GetPhotonTeam().Name);
+        }
+      
+    }
+
+
+
+
 
 }

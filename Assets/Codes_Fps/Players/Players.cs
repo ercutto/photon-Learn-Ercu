@@ -1,5 +1,6 @@
 
 using Photon.Pun;
+using Photon.Pun.UtilityScripts;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -38,6 +39,7 @@ public class Players : MonoBehaviourPunCallbacks
     public bool _blueteam;
     private InstatiateExample instatiateExample;
     public Vector3 startPos;
+ 
     [Tooltip("The local player instance. Use this to know if the local player is represented in the Scene")]
     public static GameObject LocalPlayerInstance;
     public void Awake()
@@ -58,6 +60,8 @@ public class Players : MonoBehaviourPunCallbacks
         speedArea.text = Cards.speed.ToString();
         healthArea.text = Cards.health.ToString();
         characterSprite.sprite = Cards.characterSprite;
+
+
         //gunSprite.sprite = Cards.gunSprite;
         GunName = guns.gunName;
         gunSprite.sprite = guns.gunsSprite;
@@ -66,8 +70,9 @@ public class Players : MonoBehaviourPunCallbacks
         gunRange = guns.range;
         gunRepeatTime = guns.repeatTime;
         GunReloadTime = guns.repeatTime;
-        
-        
+       
+
+
         Debug.Log(string.Format
             ("PLAYER: {0} | GUN: {1} | HEALTH: {2} | SPEED: {3} | JUMP: {4}  ",
             playerName, GunName, health, speed, jumpSpeed));
@@ -89,7 +94,25 @@ public class Players : MonoBehaviourPunCallbacks
         instatiateExample = GameObject.Find("Instantiation").GetComponent<InstatiateExample>();
 
         startPos = transform.position;
-
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject p in players)
+        {
+            Debug.Log(p.transform.position);
+        }
+        if (myTeam == 1)
+        {
+            PhotonNetwork.LocalPlayer.JoinTeam("Blue");
+           
+        }
+        else
+        {
+            PhotonNetwork.LocalPlayer.JoinTeam("Red");
+            Debug.Log(PhotonNetwork.LocalPlayer.GetPhotonTeam());
+        }
+        if (PhotonNetwork.LocalPlayer.GetPhotonTeam() != null)
+        {
+            Debug.Log(PhotonNetwork.LocalPlayer.GetPhotonTeam().Name);
+        }
     }
 
     // Update is called once per frame
@@ -108,8 +131,8 @@ public class Players : MonoBehaviourPunCallbacks
         {
             animator.SetBool("IsWalking", false);
         }
-
-
+      
+      
     }
 
     public void currentHealthHandler(float current)
@@ -128,6 +151,7 @@ public class Players : MonoBehaviourPunCallbacks
                 {
                     PhotonNetwork.Destroy(this.gameObject);
                     instatiateExample.Respawnblue();
+                  
                 }
                 else
                 {
@@ -140,8 +164,9 @@ public class Players : MonoBehaviourPunCallbacks
 
     }
    
-
    
+  
+  
 
 
 }

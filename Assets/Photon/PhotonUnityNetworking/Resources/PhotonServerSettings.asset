@@ -50,6 +50,9 @@ MonoBehaviour:
   - ColorsRed
   - RPC_Color
   - RPC_Color_Red
+  - CheckNetworkLag
+  - ShowMyInfo
+  - DisplayPlayers
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

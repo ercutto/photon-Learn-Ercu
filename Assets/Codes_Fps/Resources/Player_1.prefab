@@ -1031,7 +1031,7 @@ GameObject:
   - component: {fileID: 3830975412301708308}
   m_Layer: 0
   m_Name: Player_1
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1210,7 +1210,7 @@ MonoBehaviour:
   prefixField: -1
   Synchronization: 3
   OwnershipTransfer: 0
-  observableSearch: 2
+  observableSearch: 0
   ObservedComponents:
   - {fileID: 6444946745678237613}
   - {fileID: 6264845019663529015}
@@ -1345,6 +1345,11 @@ MonoBehaviour:
   NameBar: {fileID: 4430661327245472987}
   myTeam: 0
   myIdtext: {fileID: 2958250256565507663}
+  players: {fileID: 8034808601908906949}
+  redTeamMembers: []
+  blueTeamMembers: []
+  playerName: 
+  playershealth: 0
 --- !u!1 &8145804886158320575
 GameObject:
   m_ObjectHideFlags: 0
@@ -2014,6 +2019,10 @@ PrefabInstance:
     - target: {fileID: 4731020269642878614, guid: 9315272d63bab9549a2be6eb26b955b5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5937252896419605269, guid: 9315272d63bab9549a2be6eb26b955b5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -4.5
       objectReference: {fileID: 0}
     - target: {fileID: 6666796913265460541, guid: 9315272d63bab9549a2be6eb26b955b5, type: 3}
       propertyPath: m_Color.a

@@ -1031,7 +1031,7 @@ GameObject:
   - component: {fileID: 3830975412301708308}
   m_Layer: 0
   m_Name: Player_Red
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1345,6 +1345,11 @@ MonoBehaviour:
   NameBar: {fileID: 4430661327245472987}
   myTeam: 0
   myIdtext: {fileID: 2958250256565507663}
+  players: {fileID: 8034808601908906949}
+  redTeamMembers: []
+  blueTeamMembers: []
+  playerName: 
+  playershealth: 0
 --- !u!1 &8145804886158320575
 GameObject:
   m_ObjectHideFlags: 0
