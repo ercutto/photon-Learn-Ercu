@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Players : MonoBehaviourPunCallbacks
+public class Players : MonoBehaviourPunCallbacks 
 {
     public Cards Cards;
     public GunsStat guns;
@@ -39,7 +39,8 @@ public class Players : MonoBehaviourPunCallbacks
     public bool _blueteam;
     private InstatiateExample instatiateExample;
     public Vector3 startPos;
- 
+    public float currentHealth;
+    public Text publicHealth;
     [Tooltip("The local player instance. Use this to know if the local player is represented in the Scene")]
     public static GameObject LocalPlayerInstance;
     public void Awake()
@@ -113,6 +114,7 @@ public class Players : MonoBehaviourPunCallbacks
         {
             Debug.Log(PhotonNetwork.LocalPlayer.GetPhotonTeam().Name);
         }
+        
     }
 
     // Update is called once per frame
@@ -131,14 +133,17 @@ public class Players : MonoBehaviourPunCallbacks
         {
             animator.SetBool("IsWalking", false);
         }
-      
-      
+       
+
+        photonView.RPC("SendHealth", RpcTarget.OthersBuffered, currentHealth);
+
     }
 
     public void currentHealthHandler(float current)
     {
 
         healthArea.text = current.ToString();
+        
         if (current >= 0)
         {
 
@@ -161,12 +166,48 @@ public class Players : MonoBehaviourPunCallbacks
 
             }
         }
+        currentHealth = current;
+        photonView.RPC("SendHealth", RpcTarget.OthersBuffered,currentHealth);
 
     }
-   
-   
-  
-  
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+
+            stream.SendNext(playerName);
+            stream.SendNext(currentHealth);
+
+        }
+        else
+        {
+
+            playerName = (string)stream.ReceiveNext();
+            currentHealth = (float)stream.ReceiveNext();
+
+        }
+    }
+    [PunRPC]
+    void SendHealth(float othershealth)
+    {
+
+        //publicHealth.text = othershealth.ToString();
+        GameObject[] Other = GameObject.FindGameObjectsWithTag("Player");
+        foreach (var otherplayer in Other)
+        {
+            if (otherplayer.GetPhotonView() != this.photonView)
+            {
+                if (otherplayer.GetComponent<Players>() != null)
+                {
+                    otherplayer.GetComponent<Players>().publicHealth.text=othershealth.ToString();
+                }
+            }
+        }
+
+    }
+
+
 
 
 }

@@ -16,7 +16,7 @@ public class TeamViewer : MonoBehaviourPun
     public List<GameObject> blueTeamMembers;
     private InstatiateExample Instantiator;
     public string playerName;
-    public float playershealth;
+   
 
     // Start is called before the first frame update
     void Awake()
@@ -26,17 +26,27 @@ public class TeamViewer : MonoBehaviourPun
         {
             //photonView.RPC("RPC_GetTeam", RpcTarget.All);
             photonView.RPC("RPC_GetTeam", RpcTarget.MasterClient);
-            
 
-
+            playerName = players.playerName;
+           
+           
         }
         
 
     }
     public void Start()
     {
-     
-            
+      
+
+    }
+    private void Update()
+    {
+        if (photonView.IsMine)
+        {
+       
+
+           
+        }
     }
     [PunRPC]
     void RPC_GetTeam()
@@ -68,14 +78,7 @@ public class TeamViewer : MonoBehaviourPun
 
 
     }
-    private void Update()
-    {
-        if (photonView.IsMine)
-        {
-            photonView.RPC("DisplayPlayers", RpcTarget.AllBuffered);
-            //photonView.RPC("DisplayPlayers", RpcTarget.OthersBuffered);
-        }
-    }
+   
     [PunRPC]
     void RPC_SentTeam(int WhichTeam)
     {
@@ -83,14 +86,8 @@ public class TeamViewer : MonoBehaviourPun
       
 
     }
-    [PunRPC]
-    void DisplayPlayers()
-    {
-       playershealth = players.health;
+   
+   
 
-       playerName= players.playerName;
-    }
-    
-
-
+   
 }
