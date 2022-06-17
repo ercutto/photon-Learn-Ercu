@@ -83,6 +83,6 @@ public class InstatiateExample : MonoBehaviourPunCallbacks
             _myId = 1;
         }
     }
-    
-    
+
+   
 }

@@ -42,7 +42,11 @@ public class PlayerColliders : MonoBehaviourPunCallbacks
         {
             currentHealth -= damage;
         }
-
+        if (currentHealth == 0)
+        {
+            players.PlayerDeath();
+            currentHealth = players.health;
+        }
 
     
         

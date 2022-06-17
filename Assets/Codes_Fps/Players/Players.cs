@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Players : MonoBehaviourPunCallbacks 
+public class Players : MonoBehaviourPunCallbacks, IPunObservable
 {
     public Cards Cards;
     public GunsStat guns;
@@ -40,12 +40,16 @@ public class Players : MonoBehaviourPunCallbacks
     private InstatiateExample instatiateExample;
     public Vector3 startPos;
     public float currentHealth;
-    public Text publicHealth;
+    public Text[] publicHealth;
+    public GameObject[] Other;
+    public GameObject playerHolder;
+    
     [Tooltip("The local player instance. Use this to know if the local player is represented in the Scene")]
     public static GameObject LocalPlayerInstance;
     public void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
+        
     }
     // Start is called before the first frame update
     void Start()
@@ -71,7 +75,7 @@ public class Players : MonoBehaviourPunCallbacks
         gunRange = guns.range;
         gunRepeatTime = guns.repeatTime;
         GunReloadTime = guns.repeatTime;
-       
+        
 
 
         Debug.Log(string.Format
@@ -114,7 +118,37 @@ public class Players : MonoBehaviourPunCallbacks
         {
             Debug.Log(PhotonNetwork.LocalPlayer.GetPhotonTeam().Name);
         }
-        
+        //photonView.RPC("SendHealth", RpcTarget.OthersBuffered);
+        //Other = GameObject.FindGameObjectsWithTag("Player");
+        //foreach (var otherplayer in Other)
+        //{
+        //    if (otherplayer.GetPhotonView() != this.photonView)
+        //    {
+
+        //        if (otherplayer.GetComponent<Players>() != null)
+        //        {
+        //            for (int i = 0; i < Other.Length; i++)
+        //            {
+
+        //                Debug.Log(Other[i].name + "listede");
+        //                Other[i].GetComponent<Players>().publicHealth[i].text = currentHealth.ToString();
+
+
+        //            }
+
+
+
+
+        //            //for (int i = 0; i < publicHealth.Length; i++)
+        //            //{
+        //            //    otherplayer.GetComponent<Players>().publicHealth[i].text = othershealth.ToString();
+        //            //}
+
+        //        }
+        //    }
+        //}
+        photonView.RPC("SendHealth", RpcTarget.AllViaServer, health);
+        //viewId = this.gameObject.GetComponent<PhotonView>().ViewID;
     }
 
     // Update is called once per frame
@@ -135,40 +169,52 @@ public class Players : MonoBehaviourPunCallbacks
         }
        
 
-        photonView.RPC("SendHealth", RpcTarget.OthersBuffered, currentHealth);
+        //photonView.RPC("SendHealth", RpcTarget.OthersBuffered, currentHealth);
 
     }
 
     public void currentHealthHandler(float current)
     {
 
-        healthArea.text = current.ToString();
+       
         
         if (current >= 0)
         {
 
-            Debug.Log(current + " Current health is zero!");
+          
             if (current == 0)
             {
+               
                 //Destroy(gameObject);
-                transform.position = startPos;
-                if (myTeam == 1)
-                {
-                    PhotonNetwork.Destroy(this.gameObject);
-                    instatiateExample.Respawnblue();
-                  
-                }
-                else
-                {
-                    PhotonNetwork.Destroy(this.gameObject);
-                    instatiateExample.RespawnRed();
-                }
 
+                //if (myTeam == 1)
+                //{
+                //PhotonNetwork.Destroy(this.gameObject);
+
+
+                //instatiateExample.Respawnblue();
+
+                //}
+                //else
+                //{
+
+                //    //PhotonNetwork.Destroy(this.gameObject);
+                //    //instatiateExample.RespawnRed();
+
+
+                //}
+               
+                photonView.RPC("MoveToStartPos", RpcTarget.AllViaServer);
+                
+                photonView.RPC("SendHealth", RpcTarget.AllViaServer,currentHealth);
             }
+            
         }
-        currentHealth = current;
-        photonView.RPC("SendHealth", RpcTarget.OthersBuffered,currentHealth);
 
+        currentHealth = current;
+        healthArea.text = current.ToString();
+        photonView.RPC("SendHealth", RpcTarget.AllViaServer,currentHealth);
+       
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -178,6 +224,7 @@ public class Players : MonoBehaviourPunCallbacks
 
             stream.SendNext(playerName);
             stream.SendNext(currentHealth);
+            stream.SendNext(health);
 
         }
         else
@@ -185,6 +232,7 @@ public class Players : MonoBehaviourPunCallbacks
 
             playerName = (string)stream.ReceiveNext();
             currentHealth = (float)stream.ReceiveNext();
+            health = (float)stream.ReceiveNext();
 
         }
     }
@@ -192,22 +240,56 @@ public class Players : MonoBehaviourPunCallbacks
     void SendHealth(float othershealth)
     {
 
-        //publicHealth.text = othershealth.ToString();
-        GameObject[] Other = GameObject.FindGameObjectsWithTag("Player");
+        //////publicHealth.text = othershealth.ToString();
+        Other = GameObject.FindGameObjectsWithTag("Player");
         foreach (var otherplayer in Other)
         {
             if (otherplayer.GetPhotonView() != this.photonView)
             {
+
                 if (otherplayer.GetComponent<Players>() != null)
                 {
-                    otherplayer.GetComponent<Players>().publicHealth.text=othershealth.ToString();
+                    for (int i = 0; i < Other.Length; i++)
+                    {
+
+                    if (Other[i].GetComponent<PhotonView>().ViewID == this.gameObject.GetComponent<PhotonView>().ViewID)
+                    {
+                        Other[0].GetComponent<Players>().publicHealth[i].text = othershealth.ToString()+" :"+ Other[i].GetComponent<PhotonView>().Owner.NickName;
+                    }
+
+                    }
+
                 }
             }
         }
 
     }
+    public void PlayerDeath()
+    {
+        photonView.RPC("MoveToStartPos", RpcTarget.AllViaServer);
+    }
 
+    [PunRPC]
+    void MoveToStartPos()
+    {
+        playerHolder.SetActive(false);
+        transform.position = startPos;
+        playerHolder.SetActive(true);
+       
 
+    }
+
+    void IPunObservable.OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(playerHolder.activeSelf);
+        }
+        else
+        {
+            playerHolder.SetActive((bool)stream.ReceiveNext());
+        }
+    }
 
 
 }
