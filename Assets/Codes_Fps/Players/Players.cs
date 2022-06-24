@@ -4,6 +4,8 @@ using Photon.Pun.UtilityScripts;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Realtime;
+using UnityEngine.SceneManagement;
 
 public class Players : MonoBehaviourPunCallbacks, IPunObservable
 {
@@ -167,8 +169,11 @@ public class Players : MonoBehaviourPunCallbacks, IPunObservable
         {
             animator.SetBool("IsWalking", false);
         }
-       
 
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            LeaveRoom();
+        }
         //photonView.RPC("SendHealth", RpcTarget.OthersBuffered, currentHealth);
 
     }
@@ -291,5 +296,25 @@ public class Players : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
+    public void OnClick_LeaveRoom()
+    {
+        LeaveRoom();
+        
+    }
+    public void LeaveRoom()
+    {
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
+        PhotonNetwork.LeaveRoom();
+        OnLeftRoom();
+    }
 
+    public override void OnLeftRoom()
+    {
+        
+        
+        SceneManager.LoadScene(0);
+        base.OnLeftRoom();
+    }
+   
 }
